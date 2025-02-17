@@ -1,19 +1,19 @@
 import React from 'react';
-import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {Text, Pressable, StyleSheet} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Books from '../screens/Books/Books';
 import {Favorite} from '../screens/Favorite';
 import {Screens} from './types';
+
+import tw from 'twrnc';
 
 export const Tabs = () => {
   return (
     // @ts-ignore
     <CurvedBottomBar.Navigator
       type="DOWN"
-      style={styles.bottomBar}
-      shadowStyle={styles.shadow}
+      style={tw`rounded-t-xl`}
+      shadowStyle={tw`shadow-md`}
       height={85}
       circleWidth={80}
       bgColor="#fff"
@@ -21,9 +21,9 @@ export const Tabs = () => {
       screenOptions={{headerShown: false}}
       renderCircle={({navigate}: any) => (
         <Pressable
-          style={styles.floatingButton}
+          style={tw`w-16 h-16 rounded-full bg-white justify-center items-center shadow-md mt-[-10px]`}
           onPress={() => navigate(Screens.Create)}>
-          <Text style={styles.plusIcon}>+</Text>
+          <Text style={tw`text-black text-2xl font-bold`}>+</Text>
         </Pressable>
       )}>
       <CurvedBottomBar.Screen
@@ -49,37 +49,3 @@ export const Tabs = () => {
     </CurvedBottomBar.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  bottomBar: {
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
-  shadow: {
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: {width: 0, height: -3},
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  floatingButton: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: {width: 0, height: 2},
-    shadowRadius: 4,
-    elevation: 5,
-
-    marginTop: -10,
-  },
-  plusIcon: {
-    color: '#000',
-    fontSize: 32,
-    fontWeight: 'bold',
-  },
-});
