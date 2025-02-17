@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Pressable, StyleSheet} from 'react-native';
+import {Text, Pressable} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Books from '../screens/Books/Books';
 import {Favorite} from '../screens/Favorite';
@@ -21,7 +21,7 @@ export const Tabs = () => {
       screenOptions={{headerShown: false}}
       renderCircle={({navigate}: any) => (
         <Pressable
-          style={tw`w-16 h-16 rounded-full bg-white justify-center items-center shadow-md mt-[-10px]`}
+          style={tw`w-16 h-16 rounded-full bg-white justify-center items-center shadow-md -mt-3`}
           onPress={() => navigate(Screens.Create)}>
           <Text style={tw`text-black text-2xl font-bold`}>+</Text>
         </Pressable>
@@ -30,6 +30,7 @@ export const Tabs = () => {
         name={Screens.Books}
         position="LEFT"
         component={Books}
+        options={{headerShown: false}}
       />
       <CurvedBottomBar.Screen
         name={Screens.Favorite}

@@ -1,33 +1,27 @@
 import React from 'react';
-import {View, Text, ScrollView, TextInput} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList, Screens} from '../../navigation/types';
+import tw from 'twrnc';
 
-type RootStackParamList = {
-  Home: undefined;
-  Search: undefined;
-  Favorites: undefined;
-  Library: undefined;
-  Profile: undefined;
-};
-
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<RootStackParamList, Screens.Books>;
 
 const Books = () => {
   return (
-    <View className="flex-1 bg-white">
-      <View className="px-4 py-3 flex-row items-center justify-between">
-        <View className="flex-row items-center">
-          <Text className="ml-2 text-lg font-semibold">Hi, user!</Text>
-        </View>
+    <View style={tw`flex-1 bg-gray-200 0`}>
+      <View
+        style={tw`bg-white p-4 flex-row items-center justify-between pt-20`}>
+        <Text style={tw`text-lg font-bold`}>📚</Text>
+        <TextInput
+          style={tw`border border-gray-300 rounded-lg px-4 py-2 flex-1 ml-4`}
+          placeholder="Пошук книг..."
+          placeholderTextColor="#aaa"
+        />
       </View>
 
-      <View className="px-4 mb-4">
-        <View className="flex-row items-center bg-gray-100 rounded-full px-4 py-2">
-          <TextInput placeholder="Search for books" className="flex-1" />
-        </View>
+      <View style={tw`p-4`}>
+        <Text style={tw`text-black`}>Контент тут...</Text>
       </View>
-
-      <ScrollView className="flex-1"></ScrollView>
     </View>
   );
 };
