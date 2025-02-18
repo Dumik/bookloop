@@ -1,5 +1,6 @@
 export enum Screens {
   SignInScreen = 'SignIn',
+  SignUpScreen = 'SignUp',
   Books = 'Books',
   Chats = 'Chats',
   Favorite = 'Favorite',
@@ -10,6 +11,7 @@ export enum Screens {
 
 export type RootStackParamList = {
   [Screens.SignInScreen]: undefined;
+  [Screens.SignUpScreen]: undefined;
   [Screens.Books]: undefined;
   [Screens.Chats]: undefined;
   [Screens.Favorite]: undefined;

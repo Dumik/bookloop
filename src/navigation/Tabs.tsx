@@ -6,6 +6,8 @@ import {Favorite} from '../screens/Favorite';
 import {Screens} from './types';
 
 import tw from 'twrnc';
+import {Chats} from '../screens';
+import {Profile} from '../screens/Profile';
 
 export const Tabs = () => {
   return (
@@ -36,16 +38,23 @@ export const Tabs = () => {
         name={Screens.Favorite}
         position="LEFT"
         component={Favorite}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Favorite',
+          tabBarIcon: () => (
+            <Text style={tw`text-black text-2xl font-bold`}>❤️</Text>
+          ),
+        }}
       />
       <CurvedBottomBar.Screen
         name={Screens.Chats}
         position="RIGHT"
-        component={Favorite}
+        component={Chats}
       />
       <CurvedBottomBar.Screen
         name={Screens.Profile}
         position="RIGHT"
-        component={Favorite}
+        component={Profile}
       />
     </CurvedBottomBar.Navigator>
   );
