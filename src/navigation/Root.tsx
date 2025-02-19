@@ -8,6 +8,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {RootStackParamList, Screens} from './types';
 import {Tabs} from './Tabs';
 import {SignInScreen, SignUpScreen} from '../screens';
+import {Profile} from '../screens/Profile';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -36,6 +37,11 @@ export const Root = () => {
             component={SignUpScreen}
             name={Screens.SignUpScreen}
             options={{title: 'Sign Up'}}
+          />
+          <RootStack.Screen
+            component={Profile}
+            name={Screens.Profile}
+            options={{title: 'Profile'}}
           />
         </RootStack.Group>
       </RootStack.Navigator>

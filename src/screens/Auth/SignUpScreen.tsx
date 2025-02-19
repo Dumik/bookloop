@@ -3,10 +3,14 @@ import React, {useState} from 'react';
 import * as yup from 'yup';
 import {useForm, Controller} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
-import {View, Text, TextInput, Pressable} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {View, Text, TextInput, Pressable, Alert} from 'react-native';
 import {Eye, EyeOff} from 'lucide-react-native';
 
+import {RootStackParamList, Screens} from '../../navigation/types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useAuthStore} from '../../store';
+import {supabase} from '../../config/supabase';
 
 const schema = yup.object().shape({
   email: yup.string().email('Invalid email').required('Email is required'),
@@ -20,8 +24,11 @@ const schema = yup.object().shape({
     .required('Confirm password is required'),
 });
 
+type RequireAuthNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 export const SignUpScreen = () => {
-  const {signUp} = useAuthStore();
+  const navigation = useNavigation<RequireAuthNavigationProp>();
+  const {setUser} = useAuthStore();
 
   const {
     control,
@@ -34,8 +41,26 @@ export const SignUpScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const onSubmit = async (data: any) => {
-    signUp({email: data.email, password: data.password});
+  const onSubmit = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
+    const {error, data} = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      Alert.alert('Error', error.message);
+    } else {
+      Alert.alert('Success', 'You are registered successfully!');
+      setUser(data.user!);
+
+      navigation.popTo(Screens.Tabs);
+    }
   };
 
   return (

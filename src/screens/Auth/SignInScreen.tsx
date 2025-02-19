@@ -1,26 +1,33 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Pressable} from 'react-native';
+import {View, Text, TextInput, Pressable, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import tw from 'twrnc';
-
+import {supabase} from '../../config/supabase';
 import {RootStackParamList, Screens} from '../../navigation/types';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useAuthStore} from '../../store';
 
 type RequireAuthNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 export const SignInScreen = () => {
   const navigation = useNavigation<RequireAuthNavigationProp>();
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const {signIn} = useAuthStore();
-
   const handleSignIn = async () => {
     setLoading(true);
-    signIn({email, password});
+    const {error} = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
     setLoading(false);
+
+    if (error) {
+      Alert.alert('Login failed', error.message);
+    } else {
+      Alert.alert('Success', 'You are logged in!');
+      navigation.popTo(Screens.Tabs);
+    }
   };
 
   return (

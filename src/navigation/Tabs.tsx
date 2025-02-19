@@ -6,7 +6,7 @@ import {Favorite} from '../screens/Favorite';
 import {Screens} from './types';
 
 import tw from 'twrnc';
-import {Chats} from '../screens';
+import {Chats, CreateItem} from '../screens';
 import {Profile} from '../screens/Profile';
 
 export const Tabs = () => {
@@ -45,6 +45,12 @@ export const Tabs = () => {
             <Text style={tw`text-black text-2xl font-bold`}>❤️</Text>
           ),
         }}
+      />
+
+      <CurvedBottomBar.Screen
+        name={Screens.Create}
+        position="CENTER"
+        component={CreateItem}
       />
       <CurvedBottomBar.Screen
         name={Screens.Chats}
