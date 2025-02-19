@@ -1,6 +1,7 @@
 import {createClient} from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'react-native-url-polyfill/auto';
+import {AppState} from 'react-native';
 
 const SUPABASE_URL = 'https://hdtvnacwxslndriwzahu.supabase.co';
 const SUPABASE_ANON_KEY =
@@ -13,4 +14,12 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     persistSession: true,
     detectSessionInUrl: false,
   },
+});
+
+AppState.addEventListener('change', state => {
+  if (state === 'active') {
+    supabase.auth.startAutoRefresh();
+  } else {
+    supabase.auth.stopAutoRefresh();
+  }
 });

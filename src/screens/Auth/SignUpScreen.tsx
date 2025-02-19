@@ -6,8 +6,9 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import {useNavigation} from '@react-navigation/native';
 import {View, Text, TextInput, Pressable, Alert} from 'react-native';
 
-import {Screens} from '../../navigation/types';
+import {RootStackParamList, Screens} from '../../navigation/types';
 import {supabase} from '../../config/supabase';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -18,8 +19,11 @@ const schema = yup.object().shape({
     .required('Password is required'),
 });
 
+type RequireAuthNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
 export const SignUpScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RequireAuthNavigationProp>();
+
   const {
     control,
     handleSubmit,

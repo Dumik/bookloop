@@ -3,10 +3,12 @@ import {View, Text, TextInput, Pressable, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import tw from 'twrnc';
 import {supabase} from '../../config/supabase';
-import {Screens} from '../../navigation/types';
+import {RootStackParamList, Screens} from '../../navigation/types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
+type RequireAuthNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 export const SignInScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RequireAuthNavigationProp>();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);

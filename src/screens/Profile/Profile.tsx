@@ -2,10 +2,13 @@ import {Pressable, View, Text} from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
 import {useNavigation} from '@react-navigation/native';
-import {Screens} from '../../navigation/types';
+import {RootStackParamList, Screens} from '../../navigation/types';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type RequireAuthNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 export const Profile = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RequireAuthNavigationProp>();
 
   return (
     <View style={tw`flex-1 bg-gray-200`}>
