@@ -1,3 +1,5 @@
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
 export enum Screens {
   SignInScreen = 'SignIn',
   SignUpScreen = 'SignUp',
@@ -19,3 +21,6 @@ export type RootStackParamList = {
   [Screens.Tabs]: undefined;
   [Screens.Profile]: undefined;
 };
+
+export type RequireAuthNavigationProp =
+  NativeStackNavigationProp<RootStackParamList>;
