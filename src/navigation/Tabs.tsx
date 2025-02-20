@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, Pressable} from 'react-native';
+import {TouchableHighlight} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Books from '../screens/Books/Books';
 import {Favorite} from '../screens/Favorite';
@@ -8,6 +8,8 @@ import {Screens} from './types';
 import tw from 'twrnc';
 import {Chats, CreateItem} from '../screens';
 import {Profile} from '../screens/Profile';
+import {Plus} from 'lucide-react-native';
+import {TabBarButton} from '@components/TabBarButton';
 
 export const Tabs = () => {
   return (
@@ -21,30 +23,23 @@ export const Tabs = () => {
       bgColor="#fff"
       initialRouteName={Screens.Books}
       screenOptions={{headerShown: false}}
+      tabBar={TabBarButton}
       renderCircle={({navigate}: any) => (
-        <Pressable
+        <TouchableHighlight
           style={tw`w-16 h-16 rounded-full bg-white justify-center items-center shadow-md -mt-3`}
           onPress={() => navigate(Screens.Create)}>
-          <Text style={tw`text-black text-2xl font-bold`}>+</Text>
-        </Pressable>
+          <Plus size={25} color="black" />
+        </TouchableHighlight>
       )}>
       <CurvedBottomBar.Screen
         name={Screens.Books}
         position="LEFT"
         component={Books}
-        options={{headerShown: false}}
       />
       <CurvedBottomBar.Screen
         name={Screens.Favorite}
         position="LEFT"
         component={Favorite}
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Favorite',
-          tabBarIcon: () => (
-            <Text style={tw`text-black text-2xl font-bold`}>❤️</Text>
-          ),
-        }}
       />
 
       <CurvedBottomBar.Screen
