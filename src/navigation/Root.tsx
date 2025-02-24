@@ -9,6 +9,7 @@ import {RootStackParamList, Screens} from './types';
 import {Tabs} from './Tabs';
 import {SignInScreen, SignUpScreen} from '../screens';
 import {Profile} from '../screens/Profile';
+import {SearchModalHistory} from '@components/Search/SearchModalHistory';
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -45,6 +46,7 @@ export const Root = () => {
           />
         </RootStack.Group>
       </RootStack.Navigator>
+      <SearchModalHistory />
     </NavigationContainer>
   );
 };
