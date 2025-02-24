@@ -9,7 +9,14 @@ export enum Screens {
   Create = 'Create',
   Profile = 'Profile',
   Tabs = 'Tabs',
+  Search = 'Search',
+  BooksStack = 'BooksStack',
 }
+
+export type BooksStackParamList = {
+  [Screens.Books]: undefined;
+  [Screens.Search]: undefined;
+};
 
 export type RootStackParamList = {
   [Screens.SignInScreen]: undefined;
@@ -20,6 +27,7 @@ export type RootStackParamList = {
   [Screens.Create]: undefined;
   [Screens.Tabs]: undefined;
   [Screens.Profile]: undefined;
+  [Screens.Search]: undefined;
 };
 
 export type RequireAuthNavigationProp =

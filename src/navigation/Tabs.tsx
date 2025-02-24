@@ -1,7 +1,6 @@
 import React from 'react';
 import {TouchableHighlight} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
-import Books from '../screens/Books/Books';
 import {Favorite} from '../screens/Favorite';
 import {Screens} from './types';
 
@@ -10,6 +9,7 @@ import {Chats, CreateItem} from '../screens';
 import {Profile} from '../screens/Profile';
 import {Plus} from 'lucide-react-native';
 import {TabBarButton} from '@components/TabBarButton';
+import {BooksStackNavigator} from './BookStack';
 
 export const Tabs = () => {
   return (
@@ -21,7 +21,7 @@ export const Tabs = () => {
       height={85}
       circleWidth={80}
       bgColor="#fff"
-      initialRouteName={Screens.Books}
+      initialRouteName={Screens.BooksStack}
       screenOptions={{headerShown: false}}
       tabBar={TabBarButton}
       renderCircle={({navigate}: any) => (
@@ -32,9 +32,9 @@ export const Tabs = () => {
         </TouchableHighlight>
       )}>
       <CurvedBottomBar.Screen
-        name={Screens.Books}
+        name={Screens.BooksStack}
         position="LEFT"
-        component={Books}
+        component={BooksStackNavigator}
       />
       <CurvedBottomBar.Screen
         name={Screens.Favorite}

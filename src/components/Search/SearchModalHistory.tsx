@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {View, Text, TouchableOpacity, Pressable, Alert} from 'react-native';
 import tw from 'twrnc';
 import Animated, {
   useSharedValue,
@@ -8,9 +8,22 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import {useSearchStore} from '../../store/searchStore';
+import {X} from 'lucide-react-native';
+import {useNavigation} from '@react-navigation/native';
+import {RequireAuthNavigationProp, Screens} from '@navigation/types';
+
+const searchHistory = [
+  'iPhone 14',
+  'MacBook Pro',
+  'AirPods Pro',
+  'Apple Watch',
+];
 
 export const SearchModalHistory = () => {
-  const {isVisible, closeSearch} = useSearchStore();
+  const {isVisible, closeSearch, searchValue, setSearchValue} =
+    useSearchStore();
+  const navigation = useNavigation<RequireAuthNavigationProp>();
+
   const translateY = useSharedValue(isVisible ? 0 : 700);
 
   React.useEffect(() => {
@@ -27,18 +40,46 @@ export const SearchModalHistory = () => {
     transform: [{translateY: translateY.value}],
   }));
 
+  const handleRemoveItem = (item: string) => {};
+
+  const handleSelectItem = (item: string) => {
+    setSearchValue(item);
+    closeSearch();
+    navigation.navigate(Screens.Search);
+  };
+
   if (!isVisible) return null;
 
   return (
     <Animated.View
       style={[
-        tw`absolute bottom-0 right-0 w-full bg-white p-5 h-full h-[1000px]`,
-        {marginTop: 125, top: 0, zIndex: 100},
+        tw`absolute bottom-0 right-0 w-full bg-white p-5 h-full rounded-t-xl `,
+        {top: 120, zIndex: 100},
         modalStyle,
       ]}>
-      <Text style={tw`text-lg font-bold`}>Історія пошуку</Text>
-      <Text style={tw`text-gray-500 mt-2`}>- iPhone 14</Text>
-      <Text style={tw`text-gray-500 mt-2`}>- MacBook Pro</Text>
+      <View style={tw`flex-row justify-between items-center mb-4`}>
+        <Text style={tw`text-lg font-bold`}>Історія пошуку</Text>
+      </View>
+
+      <View style={tw`mt-2`}>
+        {searchHistory.length > 0 ? (
+          searchHistory.map(item => (
+            <Pressable
+              key={item}
+              onPress={() => handleSelectItem(item)}
+              style={tw`flex-row justify-between items-center py-2 border-b border-gray-200`}>
+              <Text style={tw`text-gray-700 text-base`}>{item}</Text>
+              <TouchableOpacity onPress={() => handleRemoveItem(item)}>
+                <X size={18} color="gray" />
+              </TouchableOpacity>
+            </Pressable>
+          ))
+        ) : (
+          <Text style={tw`text-gray-400 text-center mt-4`}>
+            Немає історії пошуку
+          </Text>
+        )}
+      </View>
     </Animated.View>
   );
 };
