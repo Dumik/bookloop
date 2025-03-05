@@ -10,6 +10,12 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Цей додаток використовує камеру для вибору фото</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Цей додаток потребує доступу до вашої галереї</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Цей додаток потребує дозволу для збереження фото</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

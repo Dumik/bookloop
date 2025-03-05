@@ -11,6 +11,9 @@ import {SignInScreen, SignUpScreen} from '../screens';
 import {Profile} from '../screens/Profile';
 import {SearchModalHistory} from '@components/Search/SearchModalHistory';
 
+import {createTamagui, TamaguiProvider, View} from 'tamagui';
+import {defaultConfig} from '@tamagui/config/v4';
+
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export const navigationRef = createNavigationContainerRef();
@@ -20,33 +23,39 @@ export const Root = () => {
     return true;
   };
 
+  const config = createTamagui(defaultConfig);
+
   return (
-    <NavigationContainer ref={navigationRef} onReady={navigationReadyCallback}>
-      <RootStack.Navigator initialRouteName={Screens.Tabs}>
-        <RootStack.Group>
-          <RootStack.Screen
-            component={Tabs}
-            name={Screens.Tabs}
-            options={{headerShown: false}}
-          />
-          <RootStack.Screen
-            component={SignInScreen}
-            name={Screens.SignInScreen}
-            options={{title: 'Sign In'}}
-          />
-          <RootStack.Screen
-            component={SignUpScreen}
-            name={Screens.SignUpScreen}
-            options={{title: 'Sign Up'}}
-          />
-          <RootStack.Screen
-            component={Profile}
-            name={Screens.Profile}
-            options={{title: 'Profile'}}
-          />
-        </RootStack.Group>
-      </RootStack.Navigator>
-      <SearchModalHistory />
-    </NavigationContainer>
+    <TamaguiProvider config={config}>
+      <NavigationContainer
+        ref={navigationRef}
+        onReady={navigationReadyCallback}>
+        <RootStack.Navigator initialRouteName={Screens.Tabs}>
+          <RootStack.Group>
+            <RootStack.Screen
+              component={Tabs}
+              name={Screens.Tabs}
+              options={{headerShown: false}}
+            />
+            <RootStack.Screen
+              component={SignInScreen}
+              name={Screens.SignInScreen}
+              options={{title: 'Sign In'}}
+            />
+            <RootStack.Screen
+              component={SignUpScreen}
+              name={Screens.SignUpScreen}
+              options={{title: 'Sign Up'}}
+            />
+            <RootStack.Screen
+              component={Profile}
+              name={Screens.Profile}
+              options={{title: 'Profile'}}
+            />
+          </RootStack.Group>
+        </RootStack.Navigator>
+        <SearchModalHistory />
+      </NavigationContainer>
+    </TamaguiProvider>
   );
 };
